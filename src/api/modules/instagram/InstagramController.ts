@@ -11,12 +11,16 @@ export class InstagramController extends Controller {
             try {
                 const {code} = await context.req.json();
 
+                const client_id = process.env.META_CLIENT_ID ?? '';
+                const client_secret = process.env.META_CLIENT_SECRET ?? '';
+                const redirect_url = process.env.META_REDIRECT_URL ?? '';
+
                 const data = new URLSearchParams();
 
-                data.append("client_id", "518787711231405")
-                data.append("client_secret", "4d48c4af0c5b715943583250fbfe4a8f")
+                data.append("client_id", client_id)
+                data.append("client_secret", client_secret)
                 data.append("grant_type", "authorization_code")
-                data.append("redirect_uri", "https://localhost:3000/oauth/link-complete")
+                data.append("redirect_uri", redirect_url)
                 data.append("code", code)
 
                 const result = await fetch('https://api.instagram.com/oauth/access_token', {

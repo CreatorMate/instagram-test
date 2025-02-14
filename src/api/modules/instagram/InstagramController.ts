@@ -32,11 +32,12 @@ export class InstagramController extends Controller {
                 });
 
                 if(!result.ok) {
-                    return errorResponse(context, 'something went wrong while connecting ig', 'something went wrong')
+                    const json = await result.json();
+                    return errorResponse(context, json, 'something went wrong')
                 }
 
                 const json = await result.json();
-                const longLivedResponse = await fetch(`https://graph.instagram.com/access_token?grant_type=ig_exchange_token&client_secret=4d48c4af0c5b715943583250fbfe4a8f&access_token=${json.access_token}`);
+                const longLivedResponse = await fetch(`https://graph.instagram.com/access_token?grant_type=ig_exchange_token&client_secret=${client_secret}&access_token=${json.access_token}`);
 
                 if(!longLivedResponse.ok) {
                     return errorResponse(context, 'something went wrong while connecting ig', 'something went wrong')
@@ -66,8 +67,8 @@ export class InstagramController extends Controller {
                     user_id: json.user_id,
                     access_token: longLivedJson.access_token,
                 });
-            } catch (error) {
-                return errorResponse(context, 'something went wrong while connecting ig', 'something went wrong')
+            } catch (error: any) {
+                return errorResponse(context, error, 'something went wrong')
             }
 
         });

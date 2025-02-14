@@ -16,6 +16,7 @@
         <section class="w-full h-full text-black bg-white flex md:justify-center items-center">
             <div class="flex md:w-auto w-full flex-col gap-3">
                 <div
+
                     class="w-full md:w-[780px] flex flex-col md:flex-row gap-6 md:gap-12 justify-between mt-5 overflow-x-hidden">
                     <NuxtLink to="/brands" class="w-full md:w-1/2 card flex flex-col py-3 overflow-x-hidden relative">
                         <Icon name="material-symbols:north-east" class="absolute right-3 top-3"/>
